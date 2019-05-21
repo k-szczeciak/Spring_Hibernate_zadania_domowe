@@ -52,6 +52,9 @@
 <h3>links:</h3>
 <a href="/allCategories" >wszystkie kategorie</a><br>
 <a href="/addCategory" >dodaj katgorie</a><br>
+<br>
+<a href="/allAuthors" >wszyscy autorzy</a><br>
+<a href="/addAuthor" >dodaj autora</a><br>
 
 </body>
 </html>
