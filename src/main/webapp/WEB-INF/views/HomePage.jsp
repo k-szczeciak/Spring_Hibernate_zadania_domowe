@@ -46,9 +46,12 @@
                 </td>
             </tr>
         </c:forEach>
-
-
 </table>
+<br><br>
+
+<h3>links:</h3>
+<a href="/allCategories" >wszystkie kategorie</a><br>
+<a href="/addCategory" >dodaj katgorie</a><br>
 
 </body>
 </html>
