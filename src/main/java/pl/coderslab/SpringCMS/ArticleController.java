@@ -21,9 +21,16 @@ public class ArticleController {
     @Autowired
     AuthorDao authorDao;
 
+    @Autowired
+    ArticleRepository articleRepository;
+
+    @Autowired
+    AuthorRepository authorRepository;
+
     @GetMapping("/allArticles")
     public String allArticles(Model model){
-        List<Article> articles = articleDao.returnAllArticles();
+        List<Article> articles = articleRepository.findAll();
+//        List<Article> articles = articleDao.returnAllArticles();
         model.addAttribute("articles", articles);
         return "allArticles";
     }
@@ -32,7 +39,8 @@ public class ArticleController {
     public String addArticle(Model model){
         Article article = new Article();
         model.addAttribute("article", article);
-        model.addAttribute("authors", authorDao.returnAllAuthors());
+        model.addAttribute("authors", authorRepository.findAll());
+//        model.addAttribute("authors", authorDao.returnAllAuthors());
         return "addArticle";
     }
 
@@ -43,29 +51,36 @@ public class ArticleController {
             return "addArticle";
         }
 
-        articleDao.addArticle(article);
-        model.addAttribute("articles", articleDao.returnAllArticles());
+//        articleDao.addArticle(article);
+        articleRepository.save(article);
+        model.addAttribute("articles", articleRepository.findAll());
+//        model.addAttribute("articles", articleDao.returnAllArticles());
         return "redirect: ../allArticles";
     }
 
     @GetMapping("/removeArticle/{id}")
     public String removeCategory(@PathVariable(name = "id") Long id , Model model){
-        articleDao.removeArticle(id);
-        model.addAttribute("articles", articleDao.returnAllArticles());
+//        articleDao.removeArticle(id);
+        articleRepository.delete(id);
+        model.addAttribute("articles", articleRepository.findAll());
+//        model.addAttribute("articles", articleDao.returnAllArticles());
         return "redirect: ../allArticles";
     }
 
     @GetMapping("/editArticle/{id}")
     public String editAuthor(@PathVariable (name = "id") Long id , Model model){
-        Article article = articleDao.findArticleById(id);
+        Article article = articleRepository.findOne(id);
+//        Article article = articleDao.findArticleById(id);
         model.addAttribute("article", article);
         return "editArticle";
     }
 
     @PostMapping("/editArticle/{id}")
     public String editCategory(@ModelAttribute Article article, Model model){
-        articleDao.editArticle(article);
-        model.addAttribute("article", articleDao.returnAllArticles());
+//        articleDao.editArticle(article);
+        articleRepository.save(article);
+        model.addAttribute("article", articleRepository.findAll());
+//        model.addAttribute("article", articleDao.returnAllArticles());
         return "redirect: ../allArticles";
     }
 }

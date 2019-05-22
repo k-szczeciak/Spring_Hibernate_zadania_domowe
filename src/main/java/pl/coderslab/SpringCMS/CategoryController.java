@@ -16,9 +16,14 @@ public class CategoryController {
     @Autowired
     private CategoryDao categoryDao;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @GetMapping("/allCategories")
     public String allCategory(Model model){
-        List<Category> categories = categoryDao.returnAllCategories();
+//        List<Category> categories = categoryDao.returnAllCategories();
+        List<Category> categories = categoryRepository.findAll();
+
         model.addAttribute("categories", categories);
         return "allCategories";
     }
@@ -35,29 +40,36 @@ public class CategoryController {
         if (result.hasErrors()) {
             return "addCategory";
         }
-        categoryDao.addCategory(category);
-        model.addAttribute("categories", categoryDao.returnAllCategories());
+//        categoryDao.addCategory(category);
+        categoryRepository.save(category);
+//        model.addAttribute("categories", categoryDao.returnAllCategories());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "redirect: ../allCategories";
     }
 
     @GetMapping("/removeCategory/{id}")
     public String removeCategory(@PathVariable (name = "id") Long id , Model model){
-        categoryDao.removeCategory(id);
-        model.addAttribute("categories", categoryDao.returnAllCategories());
+//        categoryDao.removeCategory(id);
+         categoryRepository.delete(id);
+//        model.addAttribute("categories", categoryDao.returnAllCategories());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "redirect: ../allCategories";
     }
 
     @GetMapping("/editCategory/{id}")
     public String editCategory(@PathVariable (name = "id") Long id , Model model){
-        Category category = categoryDao.findCategoryById(id);
+//        Category category = categoryDao.findCategoryById(id);
+        Category category = categoryRepository.findOne(id);
         model.addAttribute("category", category);
         return "editCategory";
     }
 
     @PostMapping("/editCategory/{id}")
     public String editCategory(@ModelAttribute Category category, Model model){
-        categoryDao.editCategory(category);
-        model.addAttribute("categories", categoryDao.returnAllCategories());
+//        categoryDao.editCategory(category);
+        categoryRepository.save(category);
+//        model.addAttribute("categories", categoryDao.returnAllCategories());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "redirect: ../allCategories";
     }
 }
