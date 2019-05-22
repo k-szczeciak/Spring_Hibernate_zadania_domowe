@@ -12,10 +12,10 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "pole nie może być puste")
     private String firstName;
 
-    @NotBlank
+    @NotBlank(message = "pole nie może być puste")
     private String lastName;
 
     public Author() {

@@ -1,6 +1,9 @@
 package pl.coderslab.SpringCMS;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
@@ -11,6 +14,8 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "pole nie może być puste")
+    @Size(max = 200, message = "Pole nie może mieć więcej niż 200 znaków")
     private String title;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -19,8 +24,11 @@ public class Article {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
+    @NotBlank(message = "pole nie może być puste")
     private Category category;
 
+    @NotBlank(message = "pole nie może być puste")
+    @Size(min=500, message = "Pole nie może mieć więcej niż 500 znaków")
     private String content;
 
     @Column(name = "created")

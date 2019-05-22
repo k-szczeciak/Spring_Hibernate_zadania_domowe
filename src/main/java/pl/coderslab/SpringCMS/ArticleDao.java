@@ -27,6 +27,30 @@ public class ArticleDao  {
         return query.getResultList();
     }
 
+    public List<Article> returnAllArticles() {
+        Query query = entityManager.createQuery("select a from Article a");
+        List<Article> allArticles = query.getResultList();
+        return allArticles;
+    }
+
+    public void addArticle(Article entity) {
+        entityManager.persist(entity);
+    }
+
+    public void removeArticle(Long id){
+        Article entity = entityManager.find(Article.class, id);
+        entityManager.remove(entityManager.contains(entity) ? entity : entityManager.merge(entity));
+    }
+
+    public void editArticle(Article article){
+        entityManager.merge(article);
+    }
+
+    public Article findArticleById(Long id){
+        return entityManager.find(Article.class, id);
+
+    }
+
 
 
 }

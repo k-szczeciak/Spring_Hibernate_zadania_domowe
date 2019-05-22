@@ -3,6 +3,7 @@ package pl.coderslab.SpringCMS;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "catergories")
@@ -12,10 +13,11 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "pole nie może być puste")
+    @Size(min = 5, message = "pole nie może mieć mniej niż 5 znaków")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "pole nie może być puste")
     private String descriprion;
 
     public Category() {

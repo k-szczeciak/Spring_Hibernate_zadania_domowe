@@ -55,6 +55,10 @@
 <br>
 <a href="/allAuthors" >wszyscy autorzy</a><br>
 <a href="/addAuthor" >dodaj autora</a><br>
+<br>
+<a href="/allArticles" >wszystkie artykuły</a><br>
+<a href="/addArticle" >dodaj artykuł</a><br>
+
 
 </body>
 </html>
