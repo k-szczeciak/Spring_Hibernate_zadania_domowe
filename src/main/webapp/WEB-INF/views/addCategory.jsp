@@ -18,8 +18,10 @@
 <form:form method="post" modelAttribute="category">
     Name:
     <form:input path="name" /><br>
+    <form:errors path="name"/>
     Description:
     <form:input path="descriprion" /><br>
+    <form:errors path="descriprion"/>
     <input type="submit" value="Dodaj" />
 </form:form>
 

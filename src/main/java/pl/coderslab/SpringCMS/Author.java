@@ -3,6 +3,7 @@ package pl.coderslab.SpringCMS;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "authors")
@@ -12,10 +13,10 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "pole nie może być puste")
+    @NotNull
     private String firstName;
 
-    @NotBlank(message = "pole nie może być puste")
+    @NotNull
     private String lastName;
 
     public Author() {

@@ -3,11 +3,13 @@ package pl.coderslab.SpringCMS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -35,7 +37,12 @@ public class ArticleController {
     }
 
     @PostMapping("/addArticle")
-    public String addArticle(@ModelAttribute Article article, @ModelAttribute Author author, Model model){
+    public String addArticle(@ModelAttribute @Valid Article article, @ModelAttribute Author author, Model model, BindingResult result){
+
+        if (result.hasErrors()) {
+            return "addArticle";
+        }
+
         articleDao.addArticle(article);
         model.addAttribute("articles", articleDao.returnAllArticles());
         return "redirect: ../allArticles";

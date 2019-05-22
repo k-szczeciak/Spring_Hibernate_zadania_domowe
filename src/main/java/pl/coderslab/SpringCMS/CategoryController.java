@@ -4,8 +4,10 @@ package pl.coderslab.SpringCMS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -29,7 +31,10 @@ public class CategoryController {
     }
 
     @PostMapping("/addCategory")
-    public String addCategory(@ModelAttribute Category category, Model model){
+    public String addCategory(@ModelAttribute @Valid Category category, Model model, BindingResult result){
+        if (result.hasErrors()) {
+            return "addCategory";
+        }
         categoryDao.addCategory(category);
         model.addAttribute("categories", categoryDao.returnAllCategories());
         return "redirect: ../allCategories";

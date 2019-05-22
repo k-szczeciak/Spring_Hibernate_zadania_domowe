@@ -1,6 +1,11 @@
 package pl.coderslab.SpringCMS;
 
 import org.hibernate.validator.constraints.NotBlank;
+import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -14,7 +19,7 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "pole nie może być puste")
+    @NotNull(message = "pole nie może być puste")
     @Size(max = 200, message = "Pole nie może mieć więcej niż 200 znaków")
     private String title;
 
@@ -27,7 +32,7 @@ public class Article {
     @NotBlank(message = "pole nie może być puste")
     private Category category;
 
-    @NotBlank(message = "pole nie może być puste")
+    @NotNull(message = "pole nie może być puste")
     @Size(min=500, message = "Pole nie może mieć więcej niż 500 znaków")
     private String content;
 

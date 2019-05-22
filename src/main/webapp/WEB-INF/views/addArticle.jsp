@@ -19,8 +19,10 @@
 <form:form method="post" modelAttribute="article">
     Tytuł:
     <form:input path="title" /><br>
+    <form:errors path="title"/>
     Autor:
     <form:select path="author" items="${authors}" /><br>
+    <form:errors path="author"/>
     <input type="submit" value="Dodaj" />
 </form:form>
 

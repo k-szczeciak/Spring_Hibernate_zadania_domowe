@@ -18,9 +18,13 @@
 
 <form:form method="post" modelAttribute="author">
     Imię:
+    <form:errors path="firstName"/>
     <form:input path="firstName" /><br>
+
     Nazwisko:
+    <form:errors path="lastName"/>
     <form:input path="lastName" /><br>
+
     <input type="submit" value="Dodaj" />
 </form:form>
 
